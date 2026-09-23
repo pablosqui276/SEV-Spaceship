@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "Background.h"
 #include "Enemy.h"
+#include "CommonEnemy.h"
+#include "SpecialEnemy.h"
 #include "Projectile.h"
 #include "Text.h"
 #include "Audio.h" 

@@ -23,8 +23,8 @@ void GameLayer::init() {
 	projectiles.clear(); // Vaciar por si reiniciamos el juego
 
 	enemies.clear(); // Vaciar por si reiniciamos el juego
-	enemies.push_back(new Enemy(300, 50, game));
-	enemies.push_back(new Enemy(300, 200, game));
+	enemies.push_back(new CommonEnemy(300, 50, game));
+	enemies.push_back(new CommonEnemy(300, 200, game));
 
 }
 
@@ -139,7 +139,7 @@ void GameLayer::update() {
 	if (newEnemyTime <= 0) {
 		int rX = (rand() % (600 - 500)) + 1 + 500;
 		int rY = (rand() % (300 - 60)) + 1 + 60;
-		enemies.push_back(new Enemy(rX, rY, game));
+		enemies.push_back(new CommonEnemy(rX, rY, game));
 		newEnemyTime = 110;
 	}
 

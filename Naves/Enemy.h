@@ -6,9 +6,10 @@
 class Enemy : public Actor
 {
 public:
-	Enemy(float x, float y, Game* game);
+	Enemy(string spriteName, string animationName, float x, float y, int width, int height, Game* game);
 	void draw() override; // Va a sobrescribir
-	void update();
+	// Esto convierte la clase en abstracta. Obliga a implementar este método
+	virtual void update() = 0;
 	Animation* aMoving;
 	Animation* animation; // Referencia a la animación mostrada
 };
