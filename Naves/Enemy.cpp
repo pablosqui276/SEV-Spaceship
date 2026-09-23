@@ -8,9 +8,18 @@ Enemy::Enemy(string spriteName, string animationName, float x, float y, int widt
 	aMoving = new Animation(animationName, width, height,
 		108, 40, 6, 3, game);
 	animation = aMoving;
+}
 
+Enemy::Enemy(string fileName, float x, float y, int width, int height, Game* game)
+	: Actor(fileName, x, y, width, height, game) {
+	vx = 1;
+	aMoving = 0;
+	animation = 0;
 }
 
 void Enemy::draw() {
-	animation->draw(x, y);
+	if (animation != 0) {
+		animation->draw(x, y);
+	}
+	else Actor::draw();
 }

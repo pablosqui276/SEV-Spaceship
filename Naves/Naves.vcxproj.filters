@@ -25,6 +25,12 @@
     <Filter Include="Archivos de origen\Actors">
       <UniqueIdentifier>{4a6c4563-89f5-4329-8f79-5c2412566d32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Actors\Enemies">
+      <UniqueIdentifier>{5ab530e8-75c1-423e-9784-d633fa4f0680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Actors\Enemies">
+      <UniqueIdentifier>{aed4d91b-7fe6-492c-87d8-9ba0bc8e2a1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -48,9 +54,6 @@
     <ClCompile Include="Background.cpp">
       <Filter>Archivos de origen\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Archivos de origen\Actors</Filter>
-    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Archivos de origen\Actors</Filter>
     </ClCompile>
@@ -62,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Archivos de origen\Actors\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialEnemy.cpp">
+      <Filter>Archivos de origen\Actors\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonEnemy.cpp">
+      <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,9 +95,6 @@
     <ClInclude Include="Background.h">
       <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Archivos de encabezado\Actors</Filter>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
@@ -97,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Archivos de encabezado\Actors\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialEnemy.h">
+      <Filter>Archivos de encabezado\Actors\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonEnemy.h">
+      <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ void GameLayer::init() {
 
 	enemies.clear(); // Vaciar por si reiniciamos el juego
 	enemies.push_back(new CommonEnemy(300, 50, game));
-	enemies.push_back(new CommonEnemy(300, 200, game));
+	enemies.push_back(new SpecialEnemy(300, 200, game));
 
 }
 
