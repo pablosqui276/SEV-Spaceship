@@ -26,10 +26,10 @@
       <UniqueIdentifier>{4a6c4563-89f5-4329-8f79-5c2412566d32}</UniqueIdentifier>
     </Filter>
     <Filter Include="Archivos de encabezado\Actors\Enemies">
-      <UniqueIdentifier>{5ab530e8-75c1-423e-9784-d633fa4f0680}</UniqueIdentifier>
+      <UniqueIdentifier>{a922b915-fde1-4dd3-857d-0d7826904dd3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Archivos de origen\Actors\Enemies">
-      <UniqueIdentifier>{aed4d91b-7fe6-492c-87d8-9ba0bc8e2a1d}</UniqueIdentifier>
+      <UniqueIdentifier>{dc7ca760-2c85-4877-8cde-b727d14c79be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +69,10 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="SpecialEnemy.cpp">
+    <ClCompile Include="CommonEnemy.cpp">
       <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="CommonEnemy.cpp">
+    <ClCompile Include="SpecialEnemy.cpp">
       <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,10 +110,10 @@
     <ClInclude Include="Enemy.h">
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="SpecialEnemy.h">
+    <ClInclude Include="CommonEnemy.h">
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="CommonEnemy.h">
+    <ClInclude Include="SpecialEnemy.h">
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

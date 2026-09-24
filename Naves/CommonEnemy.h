@@ -5,6 +5,6 @@ class CommonEnemy : public Enemy
 {
 public:
 	CommonEnemy(float x, float y, Game* game);
-	void update() override;
+	Projectile* update() override;
 };
 

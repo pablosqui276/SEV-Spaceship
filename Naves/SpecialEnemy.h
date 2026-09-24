@@ -5,7 +5,7 @@ class SpecialEnemy : public Enemy
 {
 public:
 	SpecialEnemy(float x, float y, Game* game);
-	void update() override;
+	Projectile* update() override;
 	int tickCounter;
 	int actualvy;
 };

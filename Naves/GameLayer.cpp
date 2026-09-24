@@ -20,6 +20,14 @@ void GameLayer::init() {
 	backgroundPoints = new Actor("res/icono_puntos.png",
 		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, game);
 
+	lives.push_back(new Actor("res/corazon.png",
+		WIDTH * 0.05, HEIGHT * 0.07, 44, 36, game));
+	lives.push_back(new Actor("res/corazon.png",
+		WIDTH * 0.1, HEIGHT * 0.07, 44, 36, game));
+	lives.push_back(new Actor("res/corazon.png",
+		WIDTH * 0.15, HEIGHT * 0.07, 44, 36, game));
+	
+
 	projectiles.clear(); // Vaciar por si reiniciamos el juego
 
 	enemies.clear(); // Vaciar por si reiniciamos el juego
@@ -66,6 +74,14 @@ void GameLayer::processControls() {
 		player->moveY(0);
 	}
 
+	// Cambio nave
+	if(spaceship==0) {
+		player->commonSpaceship();
+	}
+	else if(spaceship==1) {
+		player->specialSpaceship();
+	}
+
 }
 
 void GameLayer::keysToControls(SDL_Event event) {
@@ -76,7 +92,8 @@ void GameLayer::keysToControls(SDL_Event event) {
 		case SDLK_ESCAPE:
 			game->loopActive = false;
 			break;
-		case SDLK_1:
+		// Cambiamos el botón de escalar para hacer el ejercicio 5
+		case SDLK_3:
 			game->scale();
 			break;
 		case SDLK_d: // derecha
@@ -93,6 +110,12 @@ void GameLayer::keysToControls(SDL_Event event) {
 			break;
 		case SDLK_SPACE: // dispara
 			controlShoot = true;
+			break;
+		case SDLK_1: // nave comun
+			spaceship = 0;
+			break;
+		case SDLK_2: // nave comun
+			spaceship = 1;
 			break;
 		}
 
@@ -139,33 +162,66 @@ void GameLayer::update() {
 	if (newEnemyTime <= 0) {
 		int rX = (rand() % (600 - 500)) + 1 + 500;
 		int rY = (rand() % (300 - 60)) + 1 + 60;
-		enemies.push_back(new CommonEnemy(rX, rY, game));
+
+		static int enemyCounter = 0;
+		enemyCounter++;
+
+		// Cabría preaguntarnos: ¿Es esto un buen diseño? La respiesta es: seguramente no
+		if (enemyCounter % 3 == 0) {
+			enemies.push_back(new SpecialEnemy(rX, rY, game));
+		}
+		else {
+			enemies.push_back(new CommonEnemy(rX, rY, game));
+		}
+
 		newEnemyTime = 110;
 	}
 
 
 	player->update();
 	for (auto const& enemy : enemies) {
-		enemy->update();
+		Projectile* newProjectile = enemy->update();
+		if (newProjectile != NULL) {
+			projectiles.push_back(newProjectile);
+		}
 	}
 
 	for (auto const& projectile : projectiles) {
 		projectile->update();
 	}
 
+	list<Enemy*> deleteEnemies;
+	list<Projectile*> deleteProjectiles;
 
 	// Colisiones
 	for (auto const& enemy : enemies) {
 		if (player->isOverlap(enemy)) {
-			init();
-			return; // Cortar el for
+			player->lives--;
+			lives.pop_back();
+
+			// Borramos el enemigo que acaba de golpear al jugador
+			bool pInList = std::find(deleteEnemies.begin(), deleteEnemies.end(), enemy) != deleteEnemies.end();
+			if (!pInList) {
+				deleteEnemies.push_back(enemy);
+			}
+		}
+	}
+
+	// Colisiones , Player - Projectile
+	for (auto const& projectile : projectiles) {
+		if (projectile->owner != player && player->isOverlap(projectile)) {
+			player->lives--;
+			lives.pop_back();
+
+			// Borramos el proyectil que acaba de golpear al jugador
+			bool pInList = std::find(deleteProjectiles.begin(), deleteProjectiles.end(), projectile) != deleteProjectiles.end();
+			if (!pInList) {
+				deleteProjectiles.push_back(projectile);
+			}
 		}
 	}
 
 	// Colisiones , Enemy - Projectile
-
-	list<Enemy*> deleteEnemies;
-	list<Projectile*> deleteProjectiles;
 
 	for (auto const& projectile : projectiles) {
 		if (projectile->isInRender() == false) {
@@ -183,7 +239,7 @@ void GameLayer::update() {
 
 	for (auto const& enemy : enemies) {
 		for (auto const& projectile : projectiles) {
-			if (enemy->isOverlap(projectile)) {
+			if (enemy->isOverlap(projectile) and projectile->owner != enemy) {
 				bool pInList = std::find(deleteProjectiles.begin(),
 					deleteProjectiles.end(),
 					projectile) != deleteProjectiles.end();
@@ -217,6 +273,11 @@ void GameLayer::update() {
 	}
 	deleteProjectiles.clear();
 
+	if (player->lives == 0) {
+		init();
+		return; // Cortar el for
+	}
+
 
 	cout << "update GameLayer" << endl;
 }
@@ -238,6 +299,10 @@ void GameLayer::draw() {
 	backgroundPoints = new Actor("res/icono_puntos.png",
 		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, game);
 	backgroundPoints->draw();
+
+	for (auto const& live : lives) {
+		live->draw();
+	}
 
 	SDL_RenderPresent(game->renderer); // Renderiza
 }

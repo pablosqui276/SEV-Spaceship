@@ -16,6 +16,14 @@ Actor::Actor(string filename, float x, float y, int width, int height, Game* gam
 Actor::~Actor() {
 }
 
+void Actor::changeTexture(string filename, int width, int height) {
+	texture = game->getTexture(filename);
+	this->fileWidth = width;
+	this->fileHeight = height;
+	this->width = width;
+	this->height = height;
+}
+
 void Actor::draw() {
 	// Recorte en el fichero de la imagen
 	SDL_Rect source;

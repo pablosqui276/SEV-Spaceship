@@ -10,6 +10,8 @@ public:
 	virtual void draw();
 	bool isInRender();
 	bool isOverlap(Actor* actor);
+	void changeTexture(string filename, int width, int height);
+
 	SDL_Texture* texture;
 	int x;
 	int y;

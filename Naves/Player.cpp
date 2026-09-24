@@ -16,22 +16,43 @@ void Player::update() {
 }
 
 void Player::moveX(float axis) {
-	vx = axis * 3;
+	vx = axis * mult;
 }
 
 void Player::moveY(float axis) {
-	vy = axis * 3;
+	vy = axis * mult;
 }
 
 Projectile* Player::shoot() {
 	if (shootTime == 0) {
 		audioShoot->play();
 		shootTime = shootCadence;
-		return new Projectile(x, y, game);
+		return new Projectile(x, y, this, 9, game);
 	}
 	else {
 		return NULL;
 	}
 }
 
+// Cambiar la nave a la nave común
+void Player::commonSpaceship() {
+	if(spaceship != 0) {
+		Actor::changeTexture("res/jugador.png", 50, 57);
+		mult = 3;
+		shootCadence = 30;
+		shootTime = 0;
+		spaceship = 0;
+	}
+}
+
+// Cambiar la nave a la nave especial
+void Player::specialSpaceship() {
+	if (spaceship != 1) {
+		Actor::changeTexture("res/jugador_especial.png", 50, 50);
+		mult = 6;
+		shootCadence = 10;
+		shootTime = 0;
+		spaceship = 1;
+	}
+}	
 

@@ -1,14 +1,14 @@
 #include "SpecialEnemy.h"
 
 SpecialEnemy::SpecialEnemy(float x, float y, Game* game)
-	: Enemy("res/enemigo_especial.png", x, y, 36, 40, game) {
+	: Enemy("res/enemigo_especial.png", "res/enemigo_especial_movimiento.png", x, y, 80, 82, 492, 6, game) {
 	this->tickCounter = 0;
 	actualvy = -1;
 }
 
-void SpecialEnemy::update() {
+Projectile* SpecialEnemy::update() {
 	// Actualizar la animación
-	// animation->update();
+	animation->update();
 
 	if (tickCounter % 90 == 0 or tickCounter % 120 == 0) {
 		actualvy = -actualvy;
@@ -21,5 +21,7 @@ void SpecialEnemy::update() {
 	y = y + vy;
 
 	tickCounter++;
+
+	return NULL;
 }
 
