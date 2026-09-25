@@ -31,6 +31,12 @@
     <Filter Include="Archivos de origen\Actors\Enemies">
       <UniqueIdentifier>{dc7ca760-2c85-4877-8cde-b727d14c79be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Actors\PowerUps">
+      <UniqueIdentifier>{c76e382f-39ba-4ca7-9cc6-87b1c773bae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Actors\PowerUps">
+      <UniqueIdentifier>{e693780e-bf92-469b-887c-c26feacd6980}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -75,6 +81,12 @@
     <ClCompile Include="SpecialEnemy.cpp">
       <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Archivos de origen\Actors\PowerUps</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialShot.cpp">
+      <Filter>Archivos de origen\Actors\PowerUps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -115,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="SpecialEnemy.h">
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Archivos de encabezado\Actors\PowerUps</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialShot.h">
+      <Filter>Archivos de encabezado\Actors\PowerUps</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -34,6 +34,8 @@ void GameLayer::init() {
 	enemies.push_back(new CommonEnemy(300, 50, game));
 	enemies.push_back(new SpecialEnemy(300, 200, game));
 
+	powerUps.clear(); // Vaciar por si reiniciamos el juego
+
 }
 
 void GameLayer::processControls() {
@@ -167,6 +169,7 @@ void GameLayer::update() {
 		enemyCounter++;
 
 		// Cabría preaguntarnos: ¿Es esto un buen diseño? La respiesta es: seguramente no
+		// Debería ser responsabilidad del enemigo saber cuando spawnear
 		if (enemyCounter % 3 == 0) {
 			enemies.push_back(new SpecialEnemy(rX, rY, game));
 		}
@@ -177,13 +180,27 @@ void GameLayer::update() {
 		newEnemyTime = 110;
 	}
 
+	// Generar powerUps
+	newPowerUpTime--;
+	if (newPowerUpTime <= 0) {
+		int rX = (rand() % (600 - 500)) + 1 + 500;
+		int rY = (rand() % (300 - 60)) + 1 + 60;
+		powerUps.push_back(new SpecialShot(rX, rY, game));
+		newPowerUpTime = 300;
+	}
+
 
 	player->update();
+
 	for (auto const& enemy : enemies) {
 		Projectile* newProjectile = enemy->update();
 		if (newProjectile != NULL) {
 			projectiles.push_back(newProjectile);
 		}
+	}
+
+	for (auto const& powerUp : powerUps) {
+		powerUp->update();
 	}
 
 	for (auto const& projectile : projectiles) {
@@ -192,6 +209,7 @@ void GameLayer::update() {
 
 	list<Enemy*> deleteEnemies;
 	list<Projectile*> deleteProjectiles;
+	list<PowerUp*> deletePowerUps;
 
 	// Colisiones
 	for (auto const& enemy : enemies) {
@@ -203,6 +221,19 @@ void GameLayer::update() {
 			bool pInList = std::find(deleteEnemies.begin(), deleteEnemies.end(), enemy) != deleteEnemies.end();
 			if (!pInList) {
 				deleteEnemies.push_back(enemy);
+			}
+		}
+	}
+
+	//Colisiones , Player - PowerUp
+	for(auto const& powerUp : powerUps) {
+		if(player->isOverlap(powerUp)) {
+			// Procesar el power-up
+			powerUp->applyEffect(player);
+			// Marcar para eliminar
+			bool pInList = std::find(deletePowerUps.begin(), deletePowerUps.end(), powerUp) != deletePowerUps.end();
+			if(!pInList) {
+				deletePowerUps.push_back(powerUp);
 			}
 		}
 	}
@@ -273,6 +304,12 @@ void GameLayer::update() {
 	}
 	deleteProjectiles.clear();
 
+	for (auto const& delPowerUp : deletePowerUps) {
+		powerUps.remove(delPowerUp);
+		delete delPowerUp;
+	}
+	deletePowerUps.clear();
+
 	if (player->lives == 0) {
 		init();
 		return; // Cortar el for
@@ -293,6 +330,10 @@ void GameLayer::draw() {
 
 	for (auto const& enemy : enemies) {
 		enemy->draw();
+	}
+
+	for (auto const& powerUp : powerUps) {
+		powerUp->draw();
 	}
 
 	textPoints->draw();

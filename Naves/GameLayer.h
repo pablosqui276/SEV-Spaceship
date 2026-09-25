@@ -9,6 +9,8 @@
 #include "Projectile.h"
 #include "Text.h"
 #include "Audio.h" 
+#include "PowerUp.h"
+#include "SpecialShot.h"
 
 #include <list>
 
@@ -30,6 +32,8 @@ public:
 
 	int newEnemyTime = 0;
 
+	int newPowerUpTime = 90;
+
 	int spaceship = 0;
 	Player* player;
 	Background* background;
@@ -42,5 +46,6 @@ public:
 
 	list<Enemy*> enemies;
 	list<Projectile*> projectiles;
+	list<PowerUp*> powerUps;
 
 };

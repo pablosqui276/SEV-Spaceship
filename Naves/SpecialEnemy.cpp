@@ -1,7 +1,8 @@
 #include "SpecialEnemy.h"
 
 SpecialEnemy::SpecialEnemy(float x, float y, Game* game)
-	: Enemy("res/enemigo_especial.png", "res/enemigo_especial_movimiento.png", x, y, 80, 82, 492, 6, game) {
+	: Enemy("res/enemigo_especial.png", x, y, 80, 82, game) {
+	Enemy::setAnimation("res/enemigo_especial_movimiento.png", 492, 80, 6);
 	this->tickCounter = 0;
 	actualvy = -1;
 }

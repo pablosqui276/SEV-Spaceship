@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "Actor.h"
@@ -15,6 +14,7 @@ public:
 	void moveY(float axis);
 	void commonSpaceship();
 	void specialSpaceship();
+	void upgradeWeapon();
 
 	Audio* audioShoot;
 	int shootCadence = 30;
@@ -23,5 +23,6 @@ public:
 	int lives = 3;
 	int spaceship = 0;
 	int mult = 3;
+	bool hasEnhancedShot = false;
 
 };

@@ -34,6 +34,15 @@ Projectile* Player::shoot() {
 	}
 }
 
+void Player::upgradeWeapon() {
+	this->shootCadence = 10;
+	this->hasEnhancedShot = true;
+}
+
+// De querer hacerse extensible la mejor decisión sería crear una clase abstracta Spaceship
+// y que se alternase entre ambas clases, dando más flexibilidad y escalabilidad al código. 
+// Pero para este caso, se ha optado por un método más simple.
+
 // Cambiar la nave a la nave común
 void Player::commonSpaceship() {
 	if(spaceship != 0) {

@@ -1,7 +1,8 @@
 #include "CommonEnemy.h"
 
 CommonEnemy::CommonEnemy(float x, float y, Game* game)
-	: Enemy("res/enemigo.png", "res/enemigo_movimiento.png", x, y, 36, 40, 108, 3, game) {
+	: Enemy("res/enemigo.png", x, y, 36, 40, game) {
+	Enemy::setAnimation("res/enemigo_movimiento.png", 108, 40, 3);
 }
 
 Projectile* CommonEnemy::update() {
